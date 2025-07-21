@@ -1,8 +1,8 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_SISWA = 100;
-const int MAX_MAPEL = 100;
+const int MAX_SISWA = 50;
+const int MAX_MAPEL = 15;
 int index;
 string peserta;
 
@@ -20,7 +20,7 @@ struct Maxmin {
 
 Maxmin Mxmn;
 string daftarMapel[MAX_MAPEL] =
-    {"B. Indonesia","Matematika","B. Inggris","IPA","IPS"};
+    {"B. Indonesia","Matematika","B. Inggris","IPA      ","IPS      "};
 
 Siswa dataSiswa[MAX_SISWA] =
     {
@@ -66,20 +66,24 @@ void tampilPeserta(){
     }
 };
 void tampilMapel(){
-    for(int i=0; i<jumlahMapel();i++){
+    int jmm = jumlahMapel();
+    for(int i=0; i < jmm;i++){
         cout<<i+1<<". "<<daftarMapel[i]<<endl;
     }
 };
 
 void tampilData(){
+    int jmlh = jumlahPeserta();
+    int jmm = jumlahMapel();
+
     cout<<"Nama\t\t";
-    for(int i = 0; i < jumlahMapel(); i++){
+    for(int i = 0; i < jmm; i++){
         cout<<daftarMapel[i]<<"\t";
     }
     cout<<endl;
-    for(int j = 0; j < jumlahPeserta();j++){
+    for(int j = 0; j < jmlh ;j++){
         cout<<dataSiswa[j].nama<<"\t\t";
-        for(int k = 0; k <jumlahMapel(); k++){
+        for(int k = 0; k < jmm; k++){
             cout<<dataSiswa[j].nilai[k]<<"\t\t";
         }
         cout<<endl;
@@ -291,10 +295,14 @@ void deleteData(){
 
 void tambahMapel(){
     int jmlh = jumlahMapel();
-    string mapel;
+    int jms = jumlahPeserta();
+    string mapel = "";
     cout<<"Masukkan Nama Mapel Baru : ";
     cin>>mapel;
-    daftarMapel[jmlh+1] = mapel;
+    daftarMapel[jmlh] = mapel;
+    for(int i = 0; i < jms; i++){
+        dataSiswa[i].nilai[jmlh] = 0;
+    }
     cout<<endl<<"Mapel Baru Berhasil Ditambahkan...."<<endl;
 
 }
