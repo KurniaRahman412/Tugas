@@ -393,7 +393,7 @@ case 4:
     goto menu;
 
 case 5:
-    cout<<"== Tampil Rata rata nilai per Siswa =="<<endl<<endl;
+    cout<<endl<<"== Tampil Rata rata nilai per Siswa =="<<endl<<endl;
     tampilPeserta();
     cout<<"Pilih Siswa yang diinginkan :";
     cin>>index;
@@ -409,7 +409,7 @@ case 5:
     goto menu;
 
 case 6:
-    cout<<"== Tampil Rata-rata nilai per Mapel =="<<endl<<endl;
+    cout<<endl<<"== Tampil Rata-rata nilai per Mapel =="<<endl<<endl;
     tampilMapel();
     cout<<"Pilih Mapel Yang diinginkan : ";
     cin>>index;
@@ -426,7 +426,7 @@ case 6:
 
 case 7:
     cout<<"== Tampil Rata-rata nilai satu ruang semua mapel =="<<endl;
-    cout<<"Rata - rata nilai semua peserta dalam semua Mapel adalah "<<rataRataAll()<<endl;
+    cout<<"Rata - rata nilai semua peserta dalam semua Mapel adalah "<<rataRataAll()<<endl<<endl;
     goto menu;
 
 case 8:
