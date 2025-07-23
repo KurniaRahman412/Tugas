@@ -4,6 +4,7 @@ using namespace std;
 const int MAX_SISWA = 50;
 const int MAX_MAPEL = 15;
 int index;
+int pilih;
 string peserta;
 
 struct Siswa {
@@ -364,10 +365,10 @@ int main () {
     cout<<"15. Delete Mapel"<<endl;
     cout<<"99. EXIT"<<endl;
 
-    int pilih;
+ 
     cout<<"Pilih menu : "; cin>>pilih;
-    while(pilih < 1 || pilih > 15 && pilih != 99  || cin.fail()){
-        cin.clear(); cin.ignore();
+    while((pilih < 1 || (pilih > 15 && pilih != 99)) || cin.fail()){
+        cin.clear(); cin.ignore(1000, '\n');
         cout<<"Pilihan Salah!, ulangi ... : ";
         cin>>pilih;
     }
