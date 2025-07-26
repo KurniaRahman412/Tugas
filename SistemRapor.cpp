@@ -494,13 +494,14 @@ case 13:
     cout<<"=== Delete Peserta ==="<<endl<<endl;
     deleteData();
     goto menu;
+
 case 14:
     cout<<"=== Tambah Mapel ==="<<endl;
     tambahMapel();
     goto menu;
+
 case 15:
     cout<<"=== Delete Mapel ==="<<endl;
-    
     deleteMapel();
     goto menu;
 case 99:
