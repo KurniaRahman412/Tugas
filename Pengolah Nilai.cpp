@@ -73,43 +73,6 @@ void tampilMapel(){
     }
 };
 
-void tampilData(){
-    int jmlh = jumlahPeserta();
-    int jmm = jumlahMapel();
-
-    cout<<"Nama\t\t";
-    for(int i = 0; i < jmm; i++){
-        cout<<daftarMapel[i]<<"\t";
-    }
-    cout<<endl;
-    for(int j = 0; j < jmlh ;j++){
-        cout<<dataSiswa[j].nama<<"\t\t";
-        for(int k = 0; k < jmm; k++){
-            cout<<dataSiswa[j].nilai[k]<<"\t\t";
-        }
-        cout<<endl;
-    }
-};
-
-void dataPerMapel(){
-    int jmls = jumlahPeserta();
-    cout<<"Mata Pelajaran :"<<endl;
-    tampilMapel();
-    cout<<endl;
-    cout<<"Pilih mapel :";
-    cin>>index;
-
-    while(index < 1 || index > jumlahMapel() || cin.fail()){
-        cin.clear(); cin.ignore();
-        cout<<"Pilihan Salah!, ulangi ... : ";
-        cin>>index;
-    }
-    index = index-1;
-    cout<<"> Mata Pelajaran dipilih : "<<daftarMapel[index]<<endl;
-    for(int i = 0; i < jmls; i++){
-        cout<<dataSiswa[i].nama<<"\t: "<<dataSiswa[i].nilai[index]<<endl;
-    }
-}
 
 float rataRataSiswa (int index) {
     float total = 0;
@@ -166,6 +129,66 @@ void cariMaxMin (Maxmin& hasil, int ind){
     hasil.pesertaMin = siswaMin;
     hasil.min = min; 
 }
+
+void tampilData(){
+    int jmlh = jumlahPeserta();
+    int jmm = jumlahMapel();
+
+    cout<<"Nama Peserta\t";
+    for(int i = 0; i < jmm; i++){
+        cout<<daftarMapel[i]<<"\t";
+    } 
+    cout<<"Rata-rata";
+    cout<<endl;
+    for(int j = 0; j < jmlh ;j++){
+        cout<<dataSiswa[j].nama<<"\t\t";
+        for(int k = 0; k < jmm; k++){
+            cout<<dataSiswa[j].nilai[k]<<"\t\t";
+        }
+        cout<<rataRataSiswa(j);
+        cout<<endl;
+    }
+    cout<<endl;
+    cout<<"Rata-rata\t";
+    for (int i = 0; i<jumlahMapel(); i++){
+        cout<<rataRataMapel(i)<<"\t\t";
+    }
+    cout<<rataRataAll()<<endl;
+    cout<<"Nilai Max\t";
+    for(int i = 0; i<jumlahMapel();i++){
+        cariMaxMin(Mxmn,i);
+        cout<<Mxmn.max<<"\t\t";
+    }
+    cout<<endl;
+    cout<<"Nilai Min\t";
+    for(int i = 0; i<jumlahMapel();i++){
+        cariMaxMin(Mxmn,i);
+        cout<<Mxmn.min<<"\t\t";
+    }
+    cout<<endl;
+};
+
+void dataPerMapel(){
+    int jmls = jumlahPeserta();
+    cout<<"Mata Pelajaran :"<<endl;
+    tampilMapel();
+    cout<<endl;
+    cout<<"Pilih mapel :";
+    cin>>index;
+
+    while(index < 1 || index > jumlahMapel() || cin.fail()){
+        cin.clear(); cin.ignore();
+        cout<<"Pilihan Salah!, ulangi ... : ";
+        cin>>index;
+    }
+    index = index-1;
+    cout<<"> Mata Pelajaran dipilih : "<<daftarMapel[index]<<endl;
+    for(int i = 0; i < jmls; i++){
+        cout<<dataSiswa[i].nama<<"\t: "<<dataSiswa[i].nilai[index]<<endl;
+    }
+}
+
+//  ================== CRUD ================
 
 void tambahPeserta(string pesertabaru){
     int jmls = jumlahPeserta();
@@ -297,9 +320,10 @@ void deleteData(){
 void tambahMapel(){
     int jmlh = jumlahMapel();
     int jms = jumlahPeserta();
-    string mapel = "";
+    char mapelnew[15];
     cout<<"Masukkan Nama Mapel Baru : ";
-    cin>>mapel;
+    cin>>mapelnew;
+    string mapel = mapelnew;
     daftarMapel[jmlh] = mapel;
     for(int i = 0; i < jms; i++){
         dataSiswa[i].nilai[jmlh] = 0;
@@ -347,128 +371,92 @@ void deleteMapel(){
 }
 int main () {
     menu:
+    cout<<"========================= DASHBOARD ======================"<<endl;
+    tampilData();
+    cout<<endl;
     cout<<endl<<"============== DAFTAR MENU ==================="<<endl;
-    cout<<"1. Tampil Peserta Ujian"<<endl;
-    cout<<"2. Tampil Mata Pelajaran"<<endl;
-    cout<<"3. Tampil Semua Nilai Peserta Ujian di Mapel tertentu"<<endl;
-    cout<<"4. Tampil Semua Nilai Peserta Ujian di semua Mapel"<<endl;
-    cout<<"5. Tampil Rata rata nilai Satu peserta ujian di semua Mapel"<<endl;
-    cout<<"6. Tampil Rata-rata nilai semua peserta dalam Mapel tertentu"<<endl;
-    cout<<"7. Tampil Rata-rata nilai semua peserta dalam semua mapel"<<endl;
-    cout<<"8. Tampil Nilai Tertinggi peserta ujian dalam mapel tertentu"<<endl;
-    cout<<"9. Tampil Nilai Terrendah peserta ujian dalam mapel tertentu"<<endl;
-    cout<<"10. Tambah Peserta Baru"<<endl;
-    cout<<"11. Input Nilai Peserta"<<endl;
-    cout<<"12. Update Peserta"<<endl;
-    cout<<"13. Delete Peserta"<<endl;
-    cout<<"14. Tambah Mapel"<<endl;
-    cout<<"15. Delete Mapel"<<endl;
+    cout<<"1. Filter"<<endl;
+    cout<<"2. Tambah Peserta Baru"<<endl;
+    cout<<"3. Input Nilai Peserta"<<endl;
+    cout<<"4. Update Peserta"<<endl;
+    cout<<"5. Delete Peserta"<<endl;
+    cout<<"6. Tambah Mapel"<<endl;
+    cout<<"7. Delete Mapel"<<endl;
     cout<<"99. EXIT"<<endl;
 
  
     cout<<"Pilih menu : "; cin>>pilih;
-    while((pilih < 1 || (pilih > 15 && pilih != 99)) || cin.fail()){
+    while((pilih < 1 || (pilih > 8 && pilih != 99)) || cin.fail()){
         cin.clear(); cin.ignore(1000, '\n');
         cout<<"Pilihan Salah!, ulangi ... : ";
         cin>>pilih;
     }
+    cout<<endl;
 switch(pilih){
+
 case 1:
-    cout<<"==== Daftar Peserta Ujian ===="<<endl<<endl;
-    tampilPeserta();
-    goto menu;
+    search:
+    cout<<"====== FILTER ======"<<endl;
+    cout<<"1. Berdasarkan Peserta"<<endl;
+    cout<<"2. Berdasarkan Mapel"<<endl;
+    cout<<"3. Kembali"<<endl;
+    cout<<"Pilih : ";
+    cin>>pilih;
+    while(pilih < 1 || pilih > 3  || cin.fail()){
+        cin.clear(); cin.ignore(1000, '\n');
+        cout<<"Pilihan Salah!, ulangi ... : ";
+        cin>>pilih;
+    }
+    cout<<endl;
+    switch(pilih){
+        case 1:
+            cout<<endl;
+            cout<<"==== Daftar Peserta ====="<<endl;
+            tampilPeserta(); cout<<endl;
+
+            cout<<"Pilih peserta : ";
+            cin>>index;
+            while(index < 1 || index > jumlahPeserta() || cin.fail()){
+                cin.clear(); cin.ignore();
+                cout<<"Pilihan Salah!, ulangi ... : ";
+                cin>>index;
+            }
+            index = index-1;cout<<endl<<endl;
+
+            cout<<"Nilai Permapel dari : "<<dataSiswa[index].nama<<endl;
+            for(int i = 0; i<jumlahMapel();i++){
+                cout<<daftarMapel[i]<<"\t: ";
+                cout<<dataSiswa[index].nilai[i]<<endl;
+            } cout<<endl;
+
+            goto search;
+        case 2:
+            tampilMapel();
+            cout<<endl;
+            cout<<"Pilih Mapel : ";
+            cin>>index;
+            while(index < 1 || index > jumlahMapel() || cin.fail()){
+                cin.clear(); cin.ignore();
+                cout<<"Pilihan Salah!, ulangi ... : ";
+                cin>>index;
+            }
+            index = index-1;
+            cout<<daftarMapel[index];
+            cout<<endl<<endl;
+             cout<<"Nilai Peserta dari : "<<daftarMapel[index]<<endl;
+            for(int i = 0; i<jumlahPeserta();i++){
+                cout<<dataSiswa[i].nama<<"\t\t";
+                cout<<dataSiswa[i].nilai[index]<<endl;
+            }
+            cout<<endl;
+            goto search;
+        case 3:
+            goto menu;
+    }
+
+goto menu;
+
 case 2:
-    cout<<"==== Tampil Mata pelajaran ===="<<endl<<endl;
-    tampilMapel();
-    goto menu;
-case 3:
-    cout<<"== Data Nilai Peserta Per Mapel =="<<endl;
-    
-    dataPerMapel();
-    cout<<endl;
-    goto menu;
-
-case 4:
-    cout<<"==== Data Nilai Peserta Setiap Mapel ===="<<endl<<endl;
-    tampilData();
-    goto menu;
-
-case 5:
-    cout<<endl<<"== Tampil Rata rata nilai per Siswa =="<<endl<<endl;
-    tampilPeserta();
-    cout<<"Pilih Siswa yang diinginkan :";
-    cin>>index;
-
-    while(index < 1 || index > jumlahPeserta() || cin.fail()){
-        cin.clear(); cin.ignore();
-        cout<<"Pilihan Salah!, ulangi ... : ";
-        cin>>index;
-    }
-
-    cout<<endl<<"Rata-rata nilai siswa bernama "<<dataSiswa[index-1].nama<<" adalah "<<rataRataSiswa(index-1);
-    cout<<endl;
-    goto menu;
-
-case 6:
-    cout<<endl<<"== Tampil Rata-rata nilai per Mapel =="<<endl<<endl;
-    tampilMapel();
-    cout<<"Pilih Mapel Yang diinginkan : ";
-    cin>>index;
-
-    while(index < 1 || index > jumlahMapel() || cin.fail()){
-        cin.clear(); cin.ignore();
-        cout<<"Pilihan Salah!, ulangi ... : ";
-        cin>>index;
-    }
-
-    cout<<endl<<"Rata-rata Nilai Mapel "<<daftarMapel[index-1]<<" adalah "<<rataRataMapel(index-1);
-    cout<<endl;
-    goto menu;
-
-case 7:
-    cout<<"== Tampil Rata-rata nilai satu ruang semua mapel =="<<endl;
-    cout<<"Rata - rata nilai semua peserta dalam semua Mapel adalah "<<rataRataAll()<<endl<<endl;
-    goto menu;
-
-case 8:
-    cout<<"== Tampil Nilai Tertinggi Suatu Mapel=="<<endl;
-    tampilMapel();
-    cout<<endl<<"Pilih Mapel Yang Diinginkan : ";
-    cin>>index;
-
-    while(index < 1 || index > jumlahMapel() || cin.fail()){
-        cin.clear(); cin.ignore();
-        cout<<"Pilihan Salah!, ulangi ... : ";
-        cin>>index;
-    }
-
-    cout<<endl;
-    // Jalankan fungsi mencari Max dan Min
-    cariMaxMin(Mxmn,index-1);
-    // Tampilkan hasilnya
-    cout<<"Nilai Tertinggi Mapel "<<daftarMapel[index-1]<<" adalah "<<Mxmn.pesertaMax<<" dengan nilai "<<Mxmn.max;
-goto menu;
-
-case 9:
-    cout<<"==== Tampil Nilai Terrendah Suatu Mapel ===="<<endl;
-    tampilMapel();
-    cout<<endl<<"Pilih Mapel Yang Diinginkan : ";
-    cin>>index;
-
-    while(index < 1 || index > jumlahMapel() || cin.fail()){
-        cin.clear(); cin.ignore();
-        cout<<"Pilihan Salah!, ulangi ... : ";
-        cin>>index;
-    }
-    
-    cout<<endl;
-    // Jalankan fungsi mencari Max dan Min
-    cariMaxMin(Mxmn,index-1);
-    // Tampilkan hasilnya
-    cout<<"Nilai Terrendah Mapel "<<daftarMapel[index-1]<<" adalah "<<Mxmn.pesertaMin<<" dengan nilai "<<Mxmn.min;
-goto menu;
-
-case 10:
     cout<<"==== Tambah Peserta Baru ===="<<endl<<endl;
     cout<<"Masukkan Nama Peserta : "<<endl;
     cin>>peserta;
@@ -480,27 +468,27 @@ case 10:
     tambahPeserta(peserta);
     goto menu;
 
-case 11:
+case 3:
     cout<<"=== Input Nilai ===";
     inputNilai();
     goto menu;
 
-case 12:
+case 4:
     cout<<"=== Update Data Peserta === "<<endl;
+
     updateData();
     goto menu;
 
-case 13:
+case 5:
     cout<<"=== Delete Peserta ==="<<endl<<endl;
     deleteData();
     goto menu;
 
-case 14:
+case 6:
     cout<<"=== Tambah Mapel ==="<<endl;
     tambahMapel();
     goto menu;
-
-case 15:
+case 7:
     cout<<"=== Delete Mapel ==="<<endl;
     deleteMapel();
     goto menu;
