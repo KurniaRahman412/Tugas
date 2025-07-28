@@ -1,13 +1,13 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_SISWA = 50;
+const int MAX_PESERTA = 50;
 const int MAX_MAPEL = 15;
 int index;
 int pilih;
 string peserta;
 
-struct Siswa {
+struct Peserta {
     string nama;
     int nilai[MAX_MAPEL];
 };
@@ -19,11 +19,11 @@ struct Maxmin {
     int min;
 };
 
-Maxmin Mxmn;
+Maxmin Maximin;
 string daftarMapel[MAX_MAPEL] =
     {"B. Indonesia","Matematika","B. Inggris","IPA      ","IPS      "};
 
-Siswa dataSiswa[MAX_SISWA] =
+Peserta dataPeserta[MAX_PESERTA] =
     {
         {"Rama", {89,75,78,85,89}},
         {"Dio",{87,78,88,76,67}},
@@ -39,8 +39,8 @@ Siswa dataSiswa[MAX_SISWA] =
 
 int jumlahPeserta(){
     int total = 0;
-    for(int i = 0; i < MAX_SISWA; i++){
-        if(!dataSiswa[i].nama.empty()){
+    for(int i = 0; i < MAX_PESERTA; i++){
+        if(!dataPeserta[i].nama.empty()){
             total++;
         } else {
             break;
@@ -63,7 +63,7 @@ int jumlahMapel(){
 void tampilPeserta(){
     int peserta = jumlahPeserta();
     for(int i = 0; i < peserta; i++){
-        cout<<i+1<<". "<<dataSiswa[i].nama<<endl;
+        cout<<i+1<<". "<<dataPeserta[i].nama<<endl;
     }
 };
 void tampilMapel(){
@@ -74,11 +74,11 @@ void tampilMapel(){
 };
 
 
-float rataRataSiswa (int index) {
+float rataRataPeserta (int index) {
     float total = 0;
     float rataRata;
     for(int j=0; j< jumlahMapel(); j++){
-        total = total + dataSiswa[index].nilai[j];
+        total = total + dataPeserta[index].nilai[j];
     }
     return rataRata = total/jumlahMapel();
 }
@@ -88,7 +88,7 @@ float rataRataMapel (int index){
     float rataRata;
     int jmls = jumlahPeserta();
     for(int j=0; j< jmls; j++){
-        total = total + dataSiswa[j].nilai[index];
+        total = total + dataPeserta[j].nilai[index];
     }
     return rataRata = total/jmls;
 }
@@ -99,7 +99,7 @@ float rataRataAll () {
     int jmls = jumlahPeserta();
     for(int i = 0; i < jmls; i++){
         for(int j = 0; j <jumlahMapel(); j++){
-            total = total + dataSiswa[i].nilai[j];
+            total = total + dataPeserta[i].nilai[j];
         }
     }
     return rataRata=total/(jmls*jumlahMapel());
@@ -112,18 +112,18 @@ void cariMaxMin (Maxmin& hasil, int ind){
     string siswaMin = "none";
     int jmls = jumlahPeserta();
     for(int i = 0; i < jmls; i++){
-        if (dataSiswa[i].nilai[ind] >max){
-            max = dataSiswa[i].nilai[ind];
-            siswaMax = dataSiswa[i].nama;
+        if (dataPeserta[i].nilai[ind] >max){
+            max = dataPeserta[i].nilai[ind];
+            siswaMax = dataPeserta[i].nama;
         }
     }
     hasil.pesertaMax = siswaMax;
     hasil.max = max;
 
     for(int i = 0; i < jmls; i++){
-        if (dataSiswa[i].nilai[ind] < min){
-            min = dataSiswa[i].nilai[ind];
-            siswaMin = dataSiswa[i].nama;
+        if (dataPeserta[i].nilai[ind] < min){
+            min = dataPeserta[i].nilai[ind];
+            siswaMin = dataPeserta[i].nama;
         }
     }
     hasil.pesertaMin = siswaMin;
@@ -141,11 +141,11 @@ void tampilData(){
     cout<<"Rata-rata";
     cout<<endl;
     for(int j = 0; j < jmlh ;j++){
-        cout<<dataSiswa[j].nama<<"\t\t";
+        cout<<dataPeserta[j].nama<<"\t\t";
         for(int k = 0; k < jmm; k++){
-            cout<<dataSiswa[j].nilai[k]<<"\t\t";
+            cout<<dataPeserta[j].nilai[k]<<"\t\t";
         }
-        cout<<rataRataSiswa(j);
+        cout<<rataRataPeserta(j);
         cout<<endl;
     }
     cout<<endl;
@@ -156,14 +156,14 @@ void tampilData(){
     cout<<rataRataAll()<<endl;
     cout<<"Nilai Max\t";
     for(int i = 0; i<jumlahMapel();i++){
-        cariMaxMin(Mxmn,i);
-        cout<<Mxmn.max<<"\t\t";
+        cariMaxMin(Maximin,i);
+        cout<<Maximin.max<<"\t\t";
     }
     cout<<endl;
     cout<<"Nilai Min\t";
     for(int i = 0; i<jumlahMapel();i++){
-        cariMaxMin(Mxmn,i);
-        cout<<Mxmn.min<<"\t\t";
+        cariMaxMin(Maximin,i);
+        cout<<Maximin.min<<"\t\t";
     }
     cout<<endl;
 };
@@ -184,7 +184,7 @@ void dataPerMapel(){
     index = index-1;
     cout<<"> Mata Pelajaran dipilih : "<<daftarMapel[index]<<endl;
     for(int i = 0; i < jmls; i++){
-        cout<<dataSiswa[i].nama<<"\t: "<<dataSiswa[i].nilai[index]<<endl;
+        cout<<dataPeserta[i].nama<<"\t: "<<dataPeserta[i].nilai[index]<<endl;
     }
 }
 
@@ -192,9 +192,9 @@ void dataPerMapel(){
 
 void tambahPeserta(string pesertabaru){
     int jmls = jumlahPeserta();
-    dataSiswa[jmls].nama = pesertabaru;
+    dataPeserta[jmls].nama = pesertabaru;
     for(int i = 0; i<jumlahMapel();i++){
-        dataSiswa[jmls].nilai[i] = 0;
+        dataPeserta[jmls].nilai[i] = 0;
     }
     cout<<endl;
     cout<<"Peserta berhasil ditambahkan........"<<endl;
@@ -204,7 +204,7 @@ void inputNilai(){
     int jmls = jumlahPeserta();
     int nilai;
     tampilPeserta();
-    cout<<"Pilih Peserta Yang Akan Diinput :";
+    cout<<"Pilih Peserta Yang Akan Diinput :"<<endl;
     cin >> index; cout<<endl;
     
     while(index < 1 || index > jumlahPeserta() || cin.fail())
@@ -222,7 +222,7 @@ void inputNilai(){
             cout<<"Input Salah!, ulangi ... : ";
             cin>>nilai;
         }
-        dataSiswa[index].nilai[i] = nilai;
+        dataPeserta[index].nilai[i] = nilai;
         cout<<endl;
     }
     cout<<"Input Nilai Berhasil......"<<endl;
@@ -247,7 +247,7 @@ void updateData(){
     }
     index = index-1;
 
-    cout<<dataSiswa[index].nama<<endl;
+    cout<<dataPeserta[index].nama<<endl;
     cout<<"Apakah nama akan diubah? (y/n): ";
     cin>>toggle;
     while((toggle != 'y'  && toggle != 'n') || cin.fail()){
@@ -260,7 +260,7 @@ void updateData(){
         cout<<"Masukkan nama baru: ";
         cin>>namaBaru;
         cout<<endl;
-        dataSiswa[index].nama = namaBaru;
+        dataPeserta[index].nama = namaBaru;
         cout<<"Nama berhasil diubah!"<<endl;
     } else if (toggle == 'n'){
         cout<<"Apakah nilai akan diubah? (y/n): ";
@@ -274,11 +274,11 @@ void updateData(){
 
         if( toggle == 'y'){
             for(int i = 0; i < jumlahMapel(); i++){
-                cout<<i+1<<". "<<daftarMapel[i]<<" : "<<dataSiswa[index].nilai[i]<<endl;        
+                cout<<i+1<<". "<<daftarMapel[i]<<" : "<<dataPeserta[index].nilai[i]<<endl;        
             }
             cout<<"Pilih Mapel : "; cin>>pilih;
             cout<<"Masukkan nilai : "; cin>>nilai;
-            dataSiswa[index].nilai[pilih-1] = nilai;
+            dataPeserta[index].nilai[pilih-1] = nilai;
             cout<<"Nilai berhasil diubah!"<<endl;
         } else if ( toggle == 'n'){
             cout<<"Tidak ada perubahan!"<<endl<<endl;
@@ -299,7 +299,7 @@ void deleteData(){
         cin>>index;
     }
     index = index-1;
-    cout<<"Apakah data siswa "<<dataSiswa[index].nama<<" akan dihapus? (y/n) :";
+    cout<<"Apakah data peserta "<<dataPeserta[index].nama<<" akan dihapus? (y/n) :";
     cin>>toggle;
     while((toggle != 'y'  && toggle != 'n') || cin.fail()){
         cin.clear(); cin.ignore();
@@ -308,9 +308,9 @@ void deleteData(){
     }
     if(toggle == 'y'){
         for(int i = index; i <= jmlh ; i++){
-            dataSiswa[i].nama = dataSiswa[i+1].nama;
+            dataPeserta[i].nama = dataPeserta[i+1].nama;
             for(int j = 0; j<jumlahMapel(); j++){
-                dataSiswa[i].nilai[j] = dataSiswa[i+1].nilai[j];
+                dataPeserta[i].nilai[j] = dataPeserta[i+1].nilai[j];
             }
         }
     }
@@ -326,7 +326,7 @@ void tambahMapel(){
     string mapel = mapelnew;
     daftarMapel[jmlh] = mapel;
     for(int i = 0; i < jms; i++){
-        dataSiswa[i].nilai[jmlh] = 0;
+        dataPeserta[i].nilai[jmlh] = 0;
     }
     cout<<endl<<"Mapel Baru Berhasil Ditambahkan...."<<endl;
 
@@ -355,9 +355,9 @@ void deleteMapel(){
     cout<<endl;
     if(toggle == 'y'){
         for(int i = 0; i < jms ; i++){
-            dataSiswa[i].nilai[index] = 0;
+            dataPeserta[i].nilai[index] = 0;
             for(int j = index; j <= jmlh; j++){
-                dataSiswa[i].nilai[j] = dataSiswa[i].nilai[j+1];
+                dataPeserta[i].nilai[j] = dataPeserta[i].nilai[j+1];
             }
         }
         for(int k = index; k <= jmlh ; k++){
@@ -423,14 +423,15 @@ case 1:
             }
             index = index-1;cout<<endl<<endl;
 
-            cout<<"Nilai Permapel dari : "<<dataSiswa[index].nama<<endl;
+            cout<<"Nilai Permapel dari : "<<dataPeserta[index].nama<<endl;
             for(int i = 0; i<jumlahMapel();i++){
                 cout<<daftarMapel[i]<<"\t: ";
-                cout<<dataSiswa[index].nilai[i]<<endl;
+                cout<<dataPeserta[index].nilai[i]<<endl;
             } cout<<endl;
 
             goto search;
         case 2:
+            cout<<"=== Daftar Mapel ==="<<endl;
             tampilMapel();
             cout<<endl;
             cout<<"Pilih Mapel : ";
@@ -445,8 +446,8 @@ case 1:
             cout<<endl<<endl;
              cout<<"Nilai Peserta dari : "<<daftarMapel[index]<<endl;
             for(int i = 0; i<jumlahPeserta();i++){
-                cout<<dataSiswa[i].nama<<"\t\t";
-                cout<<dataSiswa[i].nilai[index]<<endl;
+                cout<<dataPeserta[i].nama<<"\t\t";
+                cout<<dataPeserta[i].nilai[index]<<endl;
             }
             cout<<endl;
             goto search;
