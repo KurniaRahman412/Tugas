@@ -203,6 +203,7 @@ void tambahPeserta(string pesertabaru){
 void inputNilai(){
     int jmls = jumlahPeserta();
     int nilai;
+    cout<<endl;
     tampilPeserta();
     cout<<"Pilih Peserta Yang Akan Diinput :"<<endl;
     cin >> index; cout<<endl;
