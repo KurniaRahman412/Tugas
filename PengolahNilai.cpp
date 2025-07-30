@@ -21,20 +21,17 @@ struct Maxmin {
 
 Maxmin Maximin;
 string daftarMapel[MAX_MAPEL] =
-    {"B. Indonesia","Matematika","B. Inggris","IPA      ","IPS      "};
+    {"B. Indonesia","Matematika","IPA      ","IPS      "};
 
 Peserta dataPeserta[MAX_PESERTA] =
     {
-        {"Rama", {89,75,78,85,89}},
-        {"Dio",{87,78,88,76,67}},
-        {"Reva",{92,92,88,88,90}},
-        {"Sona",{78,77,65,70,77}},
-        {"Riski",{78,87,67,77,65}},
-        {"Maulana",{82,84,78,78,90}},
-        {"Nana",{95,88,78,88,90}},
-        {"Rafli",{87,89,88,95,95}},
-        {"Kamal",{88,87,89,77,78}},
-        {"Sulis",{89,95,88,79,85}},
+        {"Dio",{87,78,88,76}},
+        {"Reva",{92,92,88,88}},
+        {"Riski",{78,87,67,77}},
+        {"Nana",{95,88,78,88}},
+        {"Rafli",{87,89,88,95}},
+        {"Kamal",{88,87,89,77}},
+        {"Sulis",{89,95,88,79}},
     };
 
 int jumlahPeserta(){
