@@ -1,4 +1,5 @@
 #include <iostream>
+#include <array>
 using namespace std;
 
 const int MAX_PESERTA = 50;
